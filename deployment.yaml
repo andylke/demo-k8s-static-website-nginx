@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: demo-k8s-static-website-nginx
+  labels:
+    app: demo-k8s-static-website-nginx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: demo-k8s-static-website-nginx
+  template:
+    metadata:
+      labels:
+        app: demo-k8s-static-website-nginx
+    spec:
+      containers:
+        - env:
+          image: andylke/demo-k8s-static-website-nginx
+          imagePullPolicy: Always
+          name: demo-k8s-static-website-nginx
+          ports:
+            - containerPort: 80
