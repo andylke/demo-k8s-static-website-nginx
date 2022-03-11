@@ -15,9 +15,16 @@ spec:
         app: demo-k8s-static-website-nginx
     spec:
       containers:
-        - env:
+        - name: demo-k8s-static-website-nginx
           image: andylke/demo-k8s-static-website-nginx
           imagePullPolicy: Always
-          name: demo-k8s-static-website-nginx
           ports:
             - containerPort: 80
+          volumeMounts:
+            - mountPath: /var/log/nginx
+              name: nginx-log
+      volumes:
+        - name: nginx-log
+          hostPath:
+            path: /run/desktop/mnt/host/c/demo-k8s-static-website-nginx
+            type: DirectoryOrCreate
